@@ -1,4 +1,6 @@
 import hashlib
+import os
+
 import redis
 from fastapi import Body, FastAPI
 from typing import List, Dict
@@ -8,7 +10,7 @@ import json
 
 app = FastAPI()
 
-redis_cache = redis.Redis(host="localhost", port=6379, db=0)
+redis_cache = redis.Redis(host=os.environ["redisserver"], port=6379, db=0)
 
 
 @app.get("/")
