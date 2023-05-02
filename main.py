@@ -16,9 +16,9 @@ async def root():
     return {"message": "I'am root :)"}
 
 
-@app.post('/solution', response_model=float | dict[str, str])
+@app.post('/solution')
 async def process_orders(orders: List = Body(embed=False),
-                         criterion: str = Body(embed=False)) -> float | Dict[str, str]:
+                         criterion: str = Body(embed=False)):
     if criterion is None or criterion not in ["completed", "canceled", "pending", "all"]:
         return {"message": "malformed input"}
 
