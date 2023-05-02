@@ -1,5 +1,4 @@
 import hashlib
-from typing import Annotated
 import redis
 from fastapi import Body, FastAPI
 from typing import List, Dict
@@ -18,8 +17,8 @@ async def root():
 
 
 @app.post('/solution', response_model=float | dict[str, str])
-async def process_orders(orders: Annotated[List, Body(embed=False)],
-                         criterion: Annotated[str, Body(embed=False)]) -> float | Dict[str, str]:
+async def process_orders(orders: List = Body(embed=False),
+                         criterion: str = Body(embed=False)) -> float | Dict[str, str]:
     if criterion is None or criterion not in ["completed", "canceled", "pending", "all"]:
         return {"message": "malformed input"}
 
